@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import CardFilme from './src/components/CardFilme';
 
 export default function App() {
 
@@ -18,11 +19,14 @@ export default function App() {
   }, [])
 
   return (
-    <View style={styles.container}>
-      {filmes.length > 0 ? filmes.map(filme => <text>{filme.attributes.titulo}</text>) : <text>Carregando....</text>}
+    <SafeAreaView
+     style={styles.container}>
+      <ScrollView horizontal>
+      {filmes.length > 0 ? filmes.map(filme => <CardFilme key={filme.id} filme={filme.attributes} />) : <text>Carregando....</text>}
+      </ScrollView>
+     
       
-      <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -30,7 +34,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    
     justifyContent: 'center',
   },
 });
